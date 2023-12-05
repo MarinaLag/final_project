@@ -1,5 +1,7 @@
 package by.itclass.controllers;
 
+import by.itclass.model.services.UserService;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +13,13 @@ import static by.itclass.constans.JspConstants.MESSAGE_ATTR;
 
 @WebServlet(name = "abstractController") // нет urlpattern
 public abstract class AbstractController extends HttpServlet {
+    protected UserService userService;
+
+    @Override
+    public void init() throws ServletException {
+       userService = UserService.getInstance();
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
@@ -32,6 +41,10 @@ public abstract class AbstractController extends HttpServlet {
         // setAttribute - закинет наш message  в аттрибуты
         forward(req, resp, url); // url - адрес
         // перенаправит запрос
+    }
+
+    public void redirect(HttpServletResponse resp, String url) throws IOException {
+        resp.sendRedirect(getServletContext().getContextPath() + url);
     }
 
 }
