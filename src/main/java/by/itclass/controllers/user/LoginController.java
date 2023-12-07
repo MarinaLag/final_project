@@ -20,13 +20,17 @@ import static by.itclass.constans.JspConstants.*;
 public class LoginController extends AbstractController {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+// получим значение из 1 страницы, где пользователь введет логин и пароль
         String login = req.getParameter(LOGIN_PARAM);
         String password = req.getParameter(PASS_PARAM);
 
+//  берем эти параметры и обращаемся к БД
         User user = userService.getUser(login, password);
         if (!Objects.isNull(user)) { //если есть такой user
+            // сохраняем его в session
+            // создаем объект session
             HttpSession session = req.getSession();
-            session.setAttribute(USER_ATTR, user);  //сохранили usera
+            session.setAttribute(USER_ATTR, user);  //сохранили user
             forward(req, resp, HOME_JSP);
         } else { //если нет такого user  то перенаправляем в начало введите логин и дадим сообщение
             forward(req, resp, LOGIN_JSP, USER_NOT_FOUND);

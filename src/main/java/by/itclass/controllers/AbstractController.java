@@ -17,6 +17,8 @@ public abstract class AbstractController extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
+        // проверит есть ли service если нет создаст
+        // чтобы не создавать еще одного
        userService = UserService.getInstance();
     }
 
@@ -29,10 +31,10 @@ public abstract class AbstractController extends HttpServlet {
     public void forward(HttpServletRequest req, HttpServletResponse resp,
                         String url) throws ServletException, IOException {
         req.getRequestDispatcher(url).forward(req,resp);     // url - адрес
-        // getRequestDispatcher - создаст объект, который позволяет передавать информацию
-        // от одного сервлета к другому посредством вызовов метода.
-        // forward  - перенаправляет запрос из сервлета
-        // на другой сервлет в пределах 1 запроса
+ // getRequestDispatcher - создаст объект, который позволяет передавать информацию
+// от одного сервлета к другому посредством вызовов метода.
+// forward  - перенаправляет запрос из сервлета
+ // на другой сервлет в пределах 1 запроса
     }
    //
     public void forward(HttpServletRequest req, HttpServletResponse resp,

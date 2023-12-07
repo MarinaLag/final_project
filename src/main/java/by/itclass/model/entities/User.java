@@ -6,8 +6,8 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @AllArgsConstructor
-@RequiredArgsConstructor  // конструктор не совсеми полями
-// (для создания с поролем и без поороля)
+@RequiredArgsConstructor  // конструктор не совсеми полями,обозначили их как  @NonNull
+// (для создания с поролем и без пороля)
 @Data // геттеры и сеттеры
 public class User {
     private int id;

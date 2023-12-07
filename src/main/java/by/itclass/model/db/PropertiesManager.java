@@ -17,7 +17,7 @@ public class PropertiesManager {
                 .getContextClassLoader().getResource(filePath).getPath())) {
 // Thread - т.к. в другой директории!!!
  // getContextClassLoader - загружает наш класс и может достучаться до нашего файла
-            props.load(fr); //создасться объект properties
+            props.load(fr); //создасться себя, т.е. объект properties и заполняется
         } catch (IOException e) {
             e.printStackTrace();
         }

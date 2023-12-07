@@ -25,7 +25,7 @@ public class UserDao {
         // если есть вернет объект dao, если нет - создаст dao
         return Objects.isNull(dao) ? new UserDao() : dao;
     }
-// проверит есть ли user стаким логином и паролем
+// проверит есть ли user с таким логином и паролем в БД
     public User getUser(String login, String password) {
 
         try(Connection cn = ConnectionManager.getConnection();

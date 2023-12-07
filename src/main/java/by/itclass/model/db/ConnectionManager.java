@@ -14,8 +14,8 @@ public class ConnectionManager {
 // в данном файле храниться коллекцию типа properties
     // данные для подключения к драйверу и БД
 
-    private static Connection cn;
-    private static Properties props;
+    private static Connection cn;  // хранит ссылку на объект
+    private static Properties props; // это коллекция которая будет формироваться
 
     // метод который проинициализирует наш класс, вместо конструктора
     public static void init (){
@@ -30,6 +30,8 @@ public class ConnectionManager {
     private static void loadDriver(){
         try {
             Class.forName(props.getProperty(DRIVER));
+ // по ключу DRIVER достали сведения driver, которые храняться в файле
+ // driver=com.mysql.cj.jdbc.Driver
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -40,6 +42,8 @@ public class ConnectionManager {
         return Objects.isNull(cn) || cn.isClosed()
                 ? DriverManager.getConnection(props.getProperty(URL), props)
                 : cn;
+
+         //props.getProperty(URL) - также достаем из файла, по ключу url
 // если это сn - возвращаем DriverManager.getConnection....
  // если нет cn
     }

@@ -1,6 +1,6 @@
 package by.itclass.constans;
 
-public class JspConstants {
+public class  JspConstants {
     public static final String LOGIN_PARAM = "login";
     public static final String NAME_PARAM = "name";
     public static final String PASS_PARAM = "password";
