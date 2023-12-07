@@ -31,9 +31,9 @@ public class LoginController extends AbstractController {
             // создаем объект session
             HttpSession session = req.getSession();
             session.setAttribute(USER_ATTR, user);  //сохранили user
-            forward(req, resp, HOME_JSP);
+            myForward(req, resp, HOME_JSP);
         } else { //если нет такого user  то перенаправляем в начало введите логин и дадим сообщение
-            forward(req, resp, LOGIN_JSP, USER_NOT_FOUND);
+            myForward(req, resp, LOGIN_JSP, USER_NOT_FOUND);
         }
     }
 }

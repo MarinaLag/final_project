@@ -17,6 +17,7 @@ import static by.itclass.constans.JspConstants.LOGIN_JSP;
 public class LogoutController extends AbstractController {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+       // удалять объект session
         HttpSession session = req.getSession();
         session.invalidate();
         redirect(resp,LOGIN_JSP);

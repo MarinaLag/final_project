@@ -27,21 +27,22 @@ public abstract class AbstractController extends HttpServlet {
         doPost(req, resp);
     }
 
-    // методы которые будут делать формы
-    public void forward(HttpServletRequest req, HttpServletResponse resp,
-                        String url) throws ServletException, IOException {
+    // методы которые будут делать формы String url - получит из переопределенного  метода myForward
+    public void myForward(HttpServletRequest req, HttpServletResponse resp,
+                          String url) throws ServletException, IOException {
         req.getRequestDispatcher(url).forward(req,resp);     // url - адрес
  // getRequestDispatcher - создаст объект, который позволяет передавать информацию
 // от одного сервлета к другому посредством вызовов метода.
 // forward  - перенаправляет запрос из сервлета
  // на другой сервлет в пределах 1 запроса
     }
-   //
-    public void forward(HttpServletRequest req, HttpServletResponse resp,
-                        String url, String message) throws ServletException, IOException {
+
+   // получит атрибут для метода myForward (String url)
+    public void myForward(HttpServletRequest req, HttpServletResponse resp,
+                          String url, String message) throws ServletException, IOException {
         req.setAttribute(MESSAGE_ATTR,message);
         // setAttribute - закинет наш message  в аттрибуты
-        forward(req, resp, url); // url - адрес
+        myForward(req, resp, url); // url - адрес
         // перенаправит запрос
     }
 

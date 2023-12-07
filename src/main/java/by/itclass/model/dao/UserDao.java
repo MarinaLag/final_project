@@ -46,8 +46,39 @@ public class UserDao {
         return null;
     }
 
-    // проверить добавился ли  user
+    // проверить добавился ли в БД
     public boolean addUser(User user, String password) { //пароль не храниться в классе User
-        return false; // пока true - а надо false
+        try (Connection cn = ConnectionManager.getConnection();
+        PreparedStatement ps = cn.prepareStatement(INSERT_USER);){
+        if(isAccessible(user.getLogin(),cn)){
+          ps.setString(1, user.getLogin());
+          ps.setString(2, user.getName());
+          ps.setString(3, user.getEmail());
+          ps.setString(4, password);
+
+  // если было добавление то будет выполнена 1 операция
+    // а если у нас 1 , значит все хорошо
+          return ps.executeUpdate() > 0;
+// можно и вернуть booleanv
+//         return  ps.execute();
+        }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    //проверяем не занят ли логин в БД
+    private boolean isAccessible(String login, Connection cn){
+        try(PreparedStatement ps = cn.prepareStatement(SELECT_USER_BY_LOGIN)) {
+            ps.setString(1,login);
+            // если такого logina нет - возвращает false - значит логин свободеен
+            return !ps.executeQuery().next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
