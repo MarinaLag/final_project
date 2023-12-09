@@ -1,6 +1,7 @@
 package by.itclass.constans;
 
 public class DbConstants {
+    // наименования колонок нашей таблицы
     public static final String ID_COL = "id";
     public static final String LOGIN_COL = "login";
     public static final String NAME_COL = "name";

@@ -18,16 +18,23 @@ import static by.itclass.constans.JspConstants.*;
 public class RegistrationController extends AbstractController {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       String login = req.getParameter(LOGIN_PARAM);
-       String name = req.getParameter(NAME_PARAM);
-       String password = req.getParameter(PASS_PARAM);
-       String email = req.getParameter(EMAIL_PARAM);
+        // берем параметры из запроса - это и цель любого сервлета
+        String login = req.getParameter(LOGIN_PARAM);
+        String name = req.getParameter(NAME_PARAM);
+        String password = req.getParameter(PASS_PARAM);
+        String email = req.getParameter(EMAIL_PARAM);
 
-       User user = new User(login,name,email); // создаем user
-        if(userService.addUser(user,password)){
-            redirect(resp,LOGIN_JSP);
-        }else {
-            myForward(req,resp,REGISTRATION_JSP,USER_NOT_REGISTRERED);
+        // создаем user используя конструктор @RequiredArgsConstructor (login,name,email)
+        User user = new User(login, name, email);
+        // затем  вызываем метод из service, который получит два параметра
+//  и вернет boolean
+// внутри него есть метод который создаст dao
+        if (userService.addUser(user, password)) {// вернет boolean
+            redirect(resp, LOGIN_JSP); // если да- перекинем его на строничку login
+            // что бы он смог зарегистрироваться
+        } else {
+            myForward(req, resp, REGISTRATION_JSP, USER_NOT_REGISTRERED); //если нет
+            // перенаправим на страничку регистрации и дадим сообщение
         }
 
 
